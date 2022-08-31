@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.gxutrainbranch.dao.UserDao">
+    <select id="queryByPage" resultType="com.example.gxutrainbranch.entity.User">
+        select d.userId,
+               d.userName,
+               d.userPassword,
+               d.createTime
+        from user d
+        limit #{offset}, #{count}
+    </select>
+    <insert id="addUser">
+        insert into user (user.userName, user.userPassword, user.createTime)
+        values (#{username}, #{password},  #{createTime})
+    </insert>
+
+    <delete id="delUser">
+        delete
+        from user
+        where user.userId = #{userId}
+    </delete>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*)
+        from user
+    </select>
+
+    <update id="updateUserWithPassword">
+        update user
+        set userPassword = #{userPassword}
+            where userId = #{userId}
+    </update>
+    <select id="getByUsername" resultType="com.example.gxutrainbranch.entity.User">
+        select d.userId,
+               d.userName,
+               d.userPassword,
+               d.createTime
+        from user d
+        where userName = #{userName}
+    </select>
+</mapper>

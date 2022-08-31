@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.gxutrainbranch.dao.StudentMeasurePointDao">
+    <select id="queryTypeStudentMeasurePoint" resultType="com.example.gxutrainbranch.entity.StudentMeasurePoint">
+        select *
+        from studentinformation
+        limit #{offset}, #{count}
+    </select>
+    <insert id="addStudentMeasurePoint">
+        insert into studentmeasurepoint (
+
+                  studentId,
+                  activityId,
+                  activityScore
+        )
+        values (
+                  #{ studentId},
+                  #{ activityId},
+                  #{ activityScore}
+               )
+    </insert>
+
+    <delete id="delStudentMeasurePoint">
+        delete
+        from studentmeasurepoint
+        where studentMeasurePointId = #{id}
+    </delete>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(*)
+
+        from studentmeasurepoint
+        where studentId = #{id}
+    </select>
+
+    <update id="updateMeasurePoint">
+        update studentmeasurepoint
+        set
+            studentId     =  #{studentId},
+            activityId    =  #{activityId},
+            activityScore =  #{activityScore}
+        where studentId= #{studentId}
+    </update>
+
+</mapper>

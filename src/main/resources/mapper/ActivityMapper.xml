@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.gxutrainbranch.dao.ActivityDao">
+    <select id="queryType" resultType="com.example.gxutrainbranch.entity.Activity">
+        select *
+        from activity
+        where activityType=#{type}
+        limit #{offset}, #{count}
+
+    </select>
+    <insert id="addActivity">
+        insert into activity (
+            activityId,
+            activityType,
+            activityName,
+            actionType,
+            activityScore
+        )
+        values (
+            #{activityId},
+            #{activityType},
+            #{activityName},
+            #{actionType},
+            #{activityScore}
+               )
+    </insert>
+
+    <delete id="delActivity">
+        delete
+        from activity
+        where activityId = #{id}
+    </delete>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*)
+        from activity
+        where activityType = #{type}
+    </select>
+
+    <update id="updateActivity">
+        update activity
+        set
+            activityType = #{activityType},
+            activityName=#{activityName},
+            actionType=#{actionType},
+            activityScore=#{activityScore}
+        where activityId= #{activityId}
+    </update>
+
+</mapper>

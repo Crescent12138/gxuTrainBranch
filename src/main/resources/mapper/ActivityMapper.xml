@@ -11,14 +11,12 @@
     </select>
     <insert id="addActivity">
         insert into activity (
-            activityId,
             activityType,
             activityName,
             actionType,
             activityScore
         )
         values (
-            #{activityId},
             #{activityType},
             #{activityName},
             #{actionType},

@@ -3,16 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.gxutrainbranch.dao.AdminDao">
     <select id="queryByPage" resultType="com.example.gxutrainbranch.entity.Admin">
-        select d.userId,
-               d.userName,
-               d.userPassword,
-               d.createTime,
+        select *
         from admin d
             limit #{offset}, #{count}
     </select>
     <insert id="addAdmin">
-        insert into admin (admin.userName, admin.userPassword, admin.createTime)
-        values (#{username}, #{password},  #{createTime})
+        insert into admin (userId,admin.userName, admin.userPassword, admin.createTime)
+        values (#{userId},#{userName}, #{userPassword},  #{createTime})
     </insert>
 
     <delete id="delAdmin">

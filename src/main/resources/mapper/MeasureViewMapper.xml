@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.gxutrainbranch.dao">
+<mapper namespace="com.example.gxutrainbranch.dao.MeasureViewDao">
 
 
-
+    <select id="count" resultType="java.lang.Integer">
+        select count(*)
+        from studentmeasurepoint;
+    </select>
+    <select id="queryView" resultMap="stuMeasure">
+        select * from studentmeasurepoint limit #{offset} ,#{count};
+    </select>
+    <resultMap id="stuMeasure" type="com.example.gxutrainbranch.entity.MeasureView">
+        <association property="activity" column="activityId" javaType="com.example.gxutrainbranch.entity.Activity" select="getActivity">
+        </association>
+        <association property="studentInformation" column="studentId" javaType="com.example.gxutrainbranch.entity.StudentInformation" select="getInfo">
+        </association>
+    </resultMap>
+    <select id="getActivity" resultType="com.example.gxutrainbranch.entity.Activity">
+        select *from activity where activityId = #{activityId}
+    </select>
+    <select id="getInfo" resultType="com.example.gxutrainbranch.entity.StudentInformation">
+        select *from studentinformation where studentId = #{studentId}
+    </select>
 </mapper>

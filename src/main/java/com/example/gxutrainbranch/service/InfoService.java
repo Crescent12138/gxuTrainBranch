@@ -6,8 +6,6 @@ import com.example.gxutrainbranch.entity.StudentInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * @author MaoMao
  * @Description
@@ -17,7 +15,7 @@ import java.util.List;
 @Service("InfoService")
 public class InfoService {
     @Autowired
-    StudentInformationDao infoDao;
+    StudentInformationDao studentInformationDao;
 
     /***
      *
@@ -25,7 +23,7 @@ public class InfoService {
      * @return  返回是否成功
      */
     public boolean addInfo(StudentInformation studentInformation){
-        return  infoDao.addInformation(studentInformation) == 1;
+        return  studentInformationDao.addInformation(studentInformation) == 1;
     }
 
     /***
@@ -34,7 +32,7 @@ public class InfoService {
      * @return  返回是否成功
      */
     public boolean delInfo(int id){
-        return  infoDao.delInformation(id) == 1;
+        return  studentInformationDao.delInformation(id) == 1;
     }
 
     /***
@@ -43,7 +41,7 @@ public class InfoService {
      * @return  返回是否成功
      */
     public boolean updateInfo(StudentInformation studentInformation){
-        return  infoDao.updateInformation(studentInformation) == 1;
+        return  studentInformationDao.updateInformation(studentInformation) == 1;
     }
 
     /***
@@ -53,6 +51,6 @@ public class InfoService {
      * @return  一页展示的数据量，以及总数量
      */
     public Page queryInfo(Integer currentPage, Integer numberPerPage) {
-        return new Page(infoDao.queryInformation((currentPage - 1) * numberPerPage, numberPerPage), infoDao.count());
+        return new Page(studentInformationDao.queryInformation((currentPage - 1) * numberPerPage, numberPerPage), studentInformationDao.count());
     }
 }

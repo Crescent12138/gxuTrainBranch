@@ -41,11 +41,11 @@
     <update id="updateActivity">
         update activity
         set
-            activityType = #{activityType},
-            activityName=#{activityName},
-            actionType=#{actionType},
-            activityScore=#{activityScore}
-        where activityId= #{activityId}
+            activityType    =  #{activityType},
+            activityName    =  #{activityName},
+            actionType      =  #{actionType},
+            activityScore   =  #{activityScore}
+        where activityId    =  #{activityId}
     </update>
 
 </mapper>

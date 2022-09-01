@@ -23,4 +23,8 @@ public class TestController {
     public String hello2(){
         return "hello2";
     }
+    @GetMapping("/你好")
+    public String hello12(){
+        return "hello222";
+    }
 }

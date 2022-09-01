@@ -40,10 +40,10 @@ public interface ActivityDao {
 
     /***
      *
-     * @param  id 活动实体
+     * @param  activity 活动实体
      * @return
      */
-    int updateActivity(int id);
+    int updateActivity(Activity activity);
 
     /***
      *

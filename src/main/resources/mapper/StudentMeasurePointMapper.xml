@@ -4,7 +4,8 @@
 <mapper namespace="com.example.gxutrainbranch.dao.StudentMeasurePointDao">
     <select id="queryTypeStudentMeasurePoint" resultType="com.example.gxutrainbranch.entity.StudentMeasurePoint">
         select *
-        from studentinformation
+        from studentmeasurepoint
+        where studentId = #{studentId}
         limit #{offset}, #{count}
     </select>
     <insert id="addStudentMeasurePoint">
@@ -15,9 +16,9 @@
                   activityScore
         )
         values (
-                  #{ studentId},
-                  #{ activityId},
-                  #{ activityScore}
+                  #{studentId},
+                  #{activityId},
+                  #{activityScore}
                )
     </insert>
 

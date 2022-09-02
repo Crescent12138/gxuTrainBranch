@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author MaoMao
- * @Description
+ * @Description 学生信息的功能
  * @create 2022-08-31 10:02 PM
  */
 
@@ -52,5 +52,40 @@ public class InfoService {
      */
     public Page queryInfo(Integer currentPage, Integer numberPerPage) {
         return new Page(studentInformationDao.queryInformation((currentPage - 1) * numberPerPage, numberPerPage), studentInformationDao.count());
+    }
+
+    /***
+     * 模糊查询
+     * @param regex         正则值
+     * @param currentPage   当前第几页
+     * @param numberPerPage 一页展示几个数据
+     * @return
+     */
+    public Page queryRegex(String regex,Integer currentPage, Integer numberPerPage) {
+        return new Page(studentInformationDao.queryRegex(regex,(currentPage - 1) * numberPerPage, numberPerPage), studentInformationDao.count());
+    }
+
+
+    /***
+     * 模糊查询
+     * @param regex         正则值
+     * @param currentPage   当前第几页
+     * @param numberPerPage 一页展示几个数据
+     * @return
+     */
+    public Page queryRegexDesc(String regex,Integer currentPage, Integer numberPerPage) {
+        return new Page(studentInformationDao.queryRegexDesc(regex,(currentPage - 1) * numberPerPage, numberPerPage), studentInformationDao.count());
+    }
+
+
+    /***
+     * 模糊查询
+     * @param regex         正则值
+     * @param currentPage   当前第几页
+     * @param numberPerPage 一页展示几个数据
+     * @return
+     */
+    public Page queryRegexAsc(String regex,Integer currentPage, Integer numberPerPage) {
+        return new Page(studentInformationDao.queryRegexAsc(regex,(currentPage - 1) * numberPerPage, numberPerPage), studentInformationDao.count());
     }
 }

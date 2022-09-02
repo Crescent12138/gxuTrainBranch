@@ -11,6 +11,12 @@
     <select id="queryView" resultMap="stuMeasure">
         select * from studentmeasurepoint limit #{offset} ,#{count};
     </select>
+    <select id="queryDesc" resultMap="stuMeasure">
+        select * from studentmeasurepoint order by  studentmeasurepoint.activityScore desc limit #{offset} ,#{count}
+    </select>
+    <select id="queryAsc" resultMap="stuMeasure">
+        select * from studentmeasurepoint order by  studentmeasurepoint.activityScore Asc limit #{offset} ,#{count}
+    </select>
     <resultMap id="stuMeasure" type="com.example.gxutrainbranch.entity.MeasureView">
         <association property="activity" column="activityId" javaType="com.example.gxutrainbranch.entity.Activity" select="getActivity">
         </association>

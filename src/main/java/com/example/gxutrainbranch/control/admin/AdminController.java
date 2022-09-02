@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/admin")
 public class AdminController {
     @Autowired
@@ -31,16 +32,11 @@ public class AdminController {
         return "数据库系统存在异常,请重试！";
     }
 
-    /**
-     * 分页获取管理员列表
-     *
-     * @param currentPage 当前页
-     * @param numberPerPage 每页数量
-     * @return
-     */
+
     @GetMapping
-    public Page getByPage(int currentPage, int numberPerPage) {
-        Page pagesEntity =  adminService.getByPage(currentPage, numberPerPage);
+    public Page getByPage(int offset, int limit) {
+        Page pagesEntity =  adminService.getByPage(offset, limit);
         return  pagesEntity;
     }
+
 }

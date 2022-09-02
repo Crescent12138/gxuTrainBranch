@@ -22,4 +22,19 @@ public interface MeasureViewDao {
      * @return
      */
     Integer count();
+
+    /***
+     * 升序排序，限定总分
+     * @param offset    偏移量
+     * @param count     数量
+     * @return
+     */
+    List<MeasureView>queryDesc(int offset,int count);
+    /***
+     * 降序排序，限定总分
+     * @param offset    偏移量
+     * @param count     数量
+     * @return
+     */
+    List<MeasureView>queryAsc(int offset,int count);
 }

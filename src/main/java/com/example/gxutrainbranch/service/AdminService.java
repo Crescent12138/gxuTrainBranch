@@ -3,6 +3,7 @@ package com.example.gxutrainbranch.service;
 import com.example.gxutrainbranch.dao.AdminDao;
 import com.example.gxutrainbranch.entity.Admin;
 import com.example.gxutrainbranch.entity.Page;
+import com.example.gxutrainbranch.utils.JwtUtils;
 import com.example.gxutrainbranch.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,12 +49,23 @@ public class AdminService {
      * @param password 密码
      * @return 用户名与密码是否匹配
      */
-    public Admin checkPassword(String username, String password) {
+    public String checkPassword(String username, String password) {
         List<Admin> userList = adminDao.getByUsername(username);
         if(userList.isEmpty()) return null;
         Admin user = userList.get(0);
         if(!MD5Utils.passwordIsTrue(password, user.getUserPassword())) return null;
-        return user;
+        return signToken(username);
+    }
+
+    JwtUtils jwtUtils = new JwtUtils();
+
+    /***
+     * 签发验证token
+     * @param userName
+     * @return
+     */
+    private String signToken(String userName){
+        return jwtUtils.generateToken(userName);
     }
 
     /**

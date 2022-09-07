@@ -1,6 +1,8 @@
 package com.example.gxutrainbranch.service;
 
+import com.example.gxutrainbranch.dao.SqlDao;
 import com.example.gxutrainbranch.dao.StudentInformationDao;
+import com.example.gxutrainbranch.dao.StudentMeasurePointDao;
 import com.example.gxutrainbranch.entity.Page;
 import com.example.gxutrainbranch.entity.StudentInformation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,10 @@ import org.springframework.stereotype.Service;
 public class InfoService {
     @Autowired
     StudentInformationDao studentInformationDao;
-
+    @Autowired
+    StudentMeasurePointDao studentMeasurePointDao;
+    @Autowired
+    SqlDao sqlDao;
     /***
      *
      * @param studentInformation    添加学生信息实例
@@ -32,7 +37,11 @@ public class InfoService {
      * @return  返回是否成功
      */
     public boolean delInfo(int id){
-        return  studentInformationDao.delInformation(id) == 1;
+//        sqlDao.setKey();
+        studentMeasurePointDao.delNameId(id);
+        studentInformationDao.delInformation(id);
+//        sqlDao.resetKey();
+        return true;
     }
 
     /***

@@ -1,10 +1,14 @@
 package com.example.gxutrainbranch.control.admin;
 
+import com.example.gxutrainbranch.dao.ActivityDao;
 import com.example.gxutrainbranch.entity.Page;
 import com.example.gxutrainbranch.entity.StudentInformation;
+import com.example.gxutrainbranch.service.ActivityService;
 import com.example.gxutrainbranch.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
 
 /**
  * @author MaoMao
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/admin/Info")
 public class InfoController {
     @Autowired
@@ -38,7 +43,7 @@ public class InfoController {
      * @return
      */
     @GetMapping
-    public Page getInfo(int currentPage, int numberPerPage){
+    public Page getInfo(@PathParam("currentPage") Integer currentPage, @PathParam("numberPerPage") Integer numberPerPage){
         Page page = infoService.queryInfo(currentPage,numberPerPage);
         return page;
     }
@@ -49,7 +54,7 @@ public class InfoController {
      * @return  成功或失败原因
      */
     @DeleteMapping
-    public String delInfo(int id){
+    public String delInfo(@PathParam("id") int id){
         if(infoService.delInfo(id)){
             return "删除成功";
         }
@@ -63,6 +68,7 @@ public class InfoController {
      */
     @PutMapping
     public String updateInfo(@RequestBody StudentInformation studentInformation){
+
         if(infoService.updateInfo(studentInformation)){
             return "修改成功";
         }

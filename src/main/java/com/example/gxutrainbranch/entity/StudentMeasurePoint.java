@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StudentMeasurePoint {
     private int studentMeasurePointId;
-    private int activityId;
+    private long activityId;
     private double activityScore;
-    private int studentID;
+    private long  studentID;
 }

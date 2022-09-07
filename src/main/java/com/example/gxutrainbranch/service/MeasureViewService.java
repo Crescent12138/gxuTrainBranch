@@ -1,9 +1,12 @@
 package com.example.gxutrainbranch.service;
 
 import com.example.gxutrainbranch.dao.MeasureViewDao;
+import com.example.gxutrainbranch.entity.MeasureView;
 import com.example.gxutrainbranch.entity.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author MaoMao
@@ -15,7 +18,9 @@ import org.springframework.stereotype.Service;
 public class MeasureViewService {
     @Autowired
     MeasureViewDao measureViewDao;
-
+    public List<MeasureView> queryId(int id){
+        return measureViewDao.queryId(id);
+    }
     /***
      * 普通查询（按自增查询）
      * @param currentPage   第几页

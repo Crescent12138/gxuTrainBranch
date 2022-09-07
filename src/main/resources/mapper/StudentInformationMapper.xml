@@ -32,7 +32,6 @@
         from studentinformation
         where studentId = #{id}
     </delete>
-
     <select id="count" resultType="java.lang.Integer">
         select count(*)
         from studentinformation
@@ -74,10 +73,12 @@
         where
             studentId           like concat('%',#{regex},'%') or
             studentName         like concat('%',#{regex},'%') or
+
             studentSex          like concat('%',#{regex},'%') or
             studentClass        like concat('%',#{regex},'%') or
             studentCourse       like concat('%',#{regex},'%')
         order by studentScore asc
         limit #{offset},#{count}
     </select>
+
 </mapper>

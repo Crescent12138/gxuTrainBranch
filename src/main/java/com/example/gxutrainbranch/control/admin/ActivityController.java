@@ -6,6 +6,8 @@ import com.example.gxutrainbranch.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 /**
  * @author MaoMao
  * @Description
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/admin/activity")
 public class ActivityController {
     @Autowired
@@ -49,23 +52,31 @@ public class ActivityController {
      * @return
      */
     @DeleteMapping()
-    public String del(int id){
-        if(activityService.delActivity(id)){
+    public String del(String id){
+        if(activityService.delActName(id)){
             return "删除成功";
         }
         return "数据库异常，删除失败";
     }
 
     /***
-     * 修改活动
-     * @param activity  活动实体
+     *
+     * @param mp 获取三个数组
      * @return
      */
     @PutMapping()
-    public String update(@RequestBody Activity activity){
-        if(activityService.updateActivity(activity)){
-            return "修改成功";
-        }
-        return "修改失败，数据库异常";
+    public String update(@RequestBody HashMap<String,Activity> mp){
+        Activity act1 = mp.get("");
+        Activity act2 = mp.get("");
+        Activity act3 = mp.get("");
+
+        activityService.updateActivity(act1);
+        activityService.updateActivity(act2);
+        activityService.updateActivity(act3);
+        return "修改成功";
+//        if(activityService.updateActivity(activity)){
+//            return "修改成功";
+//        }
+//        return "修改失败，数据库异常";
     }
 }

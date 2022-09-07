@@ -29,4 +29,7 @@
     <select id="getInfo" resultType="com.example.gxutrainbranch.entity.StudentInformation">
         select *from studentinformation where studentId = #{studentId}
     </select>
+    <select id="queryId" resultMap="stuMeasure">
+        select * from studentmeasurepoint where studentId = #{id};
+    </select>
 </mapper>

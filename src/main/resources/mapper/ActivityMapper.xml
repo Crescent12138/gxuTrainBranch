@@ -14,20 +14,26 @@
             activityType,
             activityName,
             actionType,
-            activityScore
+            activityScore,
+            actionLevel
         )
         values (
             #{activityType},
             #{activityName},
             #{actionType},
-            #{activityScore}
+            #{activityScore},
+            #{actionLevel}
                )
     </insert>
-
     <delete id="delActivity">
         delete
         from activity
         where activityId = #{id}
+    </delete>
+    <delete id="delActName">
+        delete
+        from activity
+        where activityName = #{activityName}
     </delete>
 
     <select id="getCount" resultType="java.lang.Integer">
@@ -42,8 +48,22 @@
             activityType    =  #{activityType},
             activityName    =  #{activityName},
             actionType      =  #{actionType},
-            activityScore   =  #{activityScore}
+            activityScore   =  #{activityScore},
+            actionLevel     =  #{actionLevel}
         where activityId    =  #{activityId}
     </update>
-
+    <select id="findName" resultType="com.example.gxutrainbranch.entity.Activity">
+        select *
+from activity
+where activityName = #{name}
+    </select>
+    <select id="findA" resultType="com.example.gxutrainbranch.entity.Activity">
+            select *
+            from activity
+            where  activityType    =  #{activityType}      and
+                   activityName    =  #{activityName}      and
+                   actionType      =  #{actionType}        and
+                   activityScore   =  #{activityScore}     and
+                   actionLevel     =  #{actionLevel}
+    </select>
 </mapper>

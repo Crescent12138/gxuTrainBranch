@@ -19,5 +19,5 @@ public class Activity {
     private double activityScore;
     private String activityType;
     private String actionType;
-
+    private String actionLevel;
 }

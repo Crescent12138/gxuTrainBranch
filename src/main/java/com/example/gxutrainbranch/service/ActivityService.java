@@ -6,6 +6,8 @@ import com.example.gxutrainbranch.entity.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author MaoMao
  * @Description
@@ -40,7 +42,12 @@ public class ActivityService {
         }
         return false;
     }
-
+    public boolean delActName(String name){
+        if(activityDao.delActName(name) == 1){
+            return true;
+        }
+        return false;
+    }
     /****
      * 修改活动
      * @param activity  活动实体
@@ -63,4 +70,14 @@ public class ActivityService {
     public Page queryActivity(int currentPage, int numberPerPage, String type){
         return new Page(activityDao.queryType(type,(currentPage - 1) * numberPerPage, numberPerPage), activityDao.getCount(type));
     }
+
+    public boolean check(Activity activity) {
+        List<Activity> lsA = activityDao.findA(activity);
+        if(lsA.size() == 0) {
+            addActivity(activity);
+            return true;
+        }
+        return false;
+    }
+
 }

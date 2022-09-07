@@ -37,7 +37,7 @@ public interface StudentMeasurePointDao {
      * @return 改变行数
      */
     int delStudentMeasurePoint(int id);
-
+    int delNameId(int id);
     /***
      *
      * @param studentMeasurePoint 学生-综测实例

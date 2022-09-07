@@ -51,4 +51,9 @@ public interface ActivityDao {
      * @return 数量
      */
     int getCount(String type);
+
+    int delActName(String activityName);
+    List<Activity> findName(String name);
+
+    List<Activity> findA(Activity activity);
 }

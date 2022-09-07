@@ -9,6 +9,7 @@ import java.util.List;
 @Mapper
 @Component(value = "MeasureViewDao")
 public interface MeasureViewDao {
+
     /***
      * 分页查询视图
      * @param offset    偏移量
@@ -16,7 +17,7 @@ public interface MeasureViewDao {
      * @return
      */
      List<MeasureView>queryView(int offset,int count);
-
+    List<MeasureView>queryId(int id);
     /***
      * 计数
      * @return

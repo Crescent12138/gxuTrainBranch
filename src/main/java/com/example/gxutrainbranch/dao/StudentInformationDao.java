@@ -75,4 +75,6 @@ public interface StudentInformationDao {
      * @return
      */
     List<StudentInformation>queryRegexAsc(String regex,int offset,int count);
+
+    int delName();
 }

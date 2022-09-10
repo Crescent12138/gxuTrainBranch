@@ -3,6 +3,7 @@ package com.example.gxutrainbranch.service;
 import com.example.gxutrainbranch.dao.AdminDao;
 import com.example.gxutrainbranch.entity.Admin;
 import com.example.gxutrainbranch.entity.Page;
+import com.example.gxutrainbranch.entity.StudentInformation;
 import com.example.gxutrainbranch.utils.JwtUtils;
 import com.example.gxutrainbranch.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,11 @@ public class AdminService {
         if(!MD5Utils.passwordIsTrue(password, user.getUserPassword())) return null;
         return signToken(username);
     }
+    public boolean findAdmin(String username){
+        List<Admin> userList = adminDao.getByUsername(username);
+        if(userList.isEmpty()) return false;
+        return true;
+    }
 
     JwtUtils jwtUtils = new JwtUtils();
 
@@ -78,5 +84,14 @@ public class AdminService {
     public Page getByPage(Integer currentPage, Integer numberPerPage) {
         return new Page(adminDao.queryByPage((currentPage - 1) * numberPerPage, numberPerPage), adminDao.getCount());
     }
-
+    public Admin queryId(Integer id){
+       List<Admin>ad =  adminDao.queryId(id);
+        return ad.get(0);
+    }
+    public void createUser(StudentInformation studentInformation){
+        Admin admin = new Admin();
+        admin.setUserName(String.valueOf(studentInformation.getStudentID()));
+        admin.setType(0);
+        admin.setUserPassword("123456");
+    }
 }

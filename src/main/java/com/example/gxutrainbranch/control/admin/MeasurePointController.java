@@ -1,8 +1,7 @@
 package com.example.gxutrainbranch.control.admin;
 
-import com.example.gxutrainbranch.entity.MeasureView;
-import com.example.gxutrainbranch.entity.Page;
-import com.example.gxutrainbranch.entity.StudentMeasurePoint;
+import com.alibaba.fastjson.JSON;
+import com.example.gxutrainbranch.entity.*;
 import com.example.gxutrainbranch.service.ActivityService;
 import com.example.gxutrainbranch.service.MeasurePointService;
 import com.example.gxutrainbranch.service.MeasureViewService;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -41,25 +41,38 @@ public class MeasurePointController {
         return measurePointService.queryType(item,current,count);
     }
     @GetMapping("/id")
-    public List<MeasureView> queryId(@PathParam("studentId") int studentId){
+    public List<MeasureView> queryId(@PathParam("studentId") long studentId){
 
        return  measureViewService.queryId(studentId);
     }
 
     /***
      * 增加
-     * @param measureView   综测实例
+     * @param mp   综测实例
      * @return
      */
-    @PostMapping
-    public String add(@RequestBody MeasureView measureView){
-        return getString(measureView);
+    @PostMapping("/{id}")
+    public String add(@RequestBody HashMap<String,List<Activity>> mp,@PathVariable long id){
+        List<Activity> tmp= mp.get("ls");
+        measurePointService.delName(id);
+//        List<Activity> ls = JSON.parseObject(JSON.toJSONString(mp),  List<Activity>.class);
+        for (Activity activity : tmp){
+            if(activity.getActivityName() == "")continue;
+            long ids = activityService.check(activity);
+            StudentMeasurePoint stu = new StudentMeasurePoint();
+            stu.setStudentId(id);
+            stu.setActivityId(ids);
+            stu.setActivityScore(activity.getActivityScore());
+            measurePointService.addMeasure(stu);
+        }
+        MeasureView measureView ;
+        return "ok";
     }
 
     private String getString(@RequestBody MeasureView measureView) {
         activityService.check(measureView.getActivity());
         StudentMeasurePoint studentMeasurePoint = new StudentMeasurePoint();
-        studentMeasurePoint.setStudentID(measureView.getStudentInformation().getStudentID());
+        studentMeasurePoint.setStudentId(measureView.getStudentInformation().getStudentID());
         studentMeasurePoint.setStudentMeasurePointId(measureView.getStudentMeasurePointId());
         studentMeasurePoint.setActivityId(measureView.getActivity().getActivityId());
         studentMeasurePoint.setActivityScore(measureView.getActivity().getActivityScore());

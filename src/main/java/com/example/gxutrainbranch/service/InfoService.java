@@ -8,6 +8,8 @@ import com.example.gxutrainbranch.entity.StudentInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author MaoMao
  * @Description 学生信息的功能
@@ -36,7 +38,7 @@ public class InfoService {
      * @param id    删除的学生id
      * @return  返回是否成功
      */
-    public boolean delInfo(int id){
+    public boolean delInfo(Long id){
 //        sqlDao.setKey();
         studentMeasurePointDao.delNameId(id);
         studentInformationDao.delInformation(id);
@@ -96,5 +98,26 @@ public class InfoService {
      */
     public Page queryRegexAsc(String regex,Integer currentPage, Integer numberPerPage) {
         return new Page(studentInformationDao.queryRegexAsc(regex,(currentPage - 1) * numberPerPage, numberPerPage), studentInformationDao.count());
+    }
+
+    public StudentInformation queryId(Integer id){
+        List<StudentInformation> ls = studentInformationDao.findId(id);
+        return ls.get(0);
+    }
+    public Integer queryRank(String course,int id){
+        String pro = course.substring(0,course.length() - 2);
+        List<StudentInformation>st = studentInformationDao.findCourse(pro);
+        for(int i = 0 ; i < st.size(); i ++){
+            if (st.get(i).getStudentID() == id ) {
+                return i;
+            }
+        }
+        return 0;
+    }
+    public Integer querySize(String course){
+        String pro = course.substring(0,course.length() - 2);
+        List<StudentInformation>st = studentInformationDao.findCourse(pro);
+
+        return st.size();
     }
 }

@@ -5,10 +5,9 @@ import com.example.gxutrainbranch.entity.MeasureView;
 import com.example.gxutrainbranch.entity.Page;
 import com.example.gxutrainbranch.service.MeasureViewService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 /**
  * @author MaoMao
@@ -26,5 +25,10 @@ public class MeasureController {
     @GetMapping()
     public Page queryByPage(int current,int count){
         return measureViewService.queryView(current, count);
+    }
+
+    @PostMapping()
+    public void update(@RequestBody HashMap<String ,Object> mp){
+        
     }
 }

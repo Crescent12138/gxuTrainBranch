@@ -36,8 +36,8 @@ public interface StudentMeasurePointDao {
      * @param id 学生综测单行的id
      * @return 改变行数
      */
-    int delStudentMeasurePoint(int id);
-    int delNameId(int id);
+    int delStudentMeasurePoint(long  id);
+    int delNameId(Long id);
     /***
      *
      * @param studentMeasurePoint 学生-综测实例
@@ -67,4 +67,6 @@ public interface StudentMeasurePointDao {
      * @return  数量
      */
     int count(int userId);
+
+//    int delFromId(long id);
 }

@@ -56,6 +56,6 @@ public interface AdminDao {
      * @return 管理员实例
      */
     List<Admin>getByUsername(String userName);
-
+    List<Admin>queryId(int id);
 
 }

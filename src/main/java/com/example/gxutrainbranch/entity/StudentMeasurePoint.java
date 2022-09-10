@@ -17,5 +17,5 @@ public class StudentMeasurePoint {
     private int studentMeasurePointId;
     private long activityId;
     private double activityScore;
-    private long  studentID;
+    private long  studentId;
 }

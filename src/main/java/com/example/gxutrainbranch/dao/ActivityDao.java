@@ -56,4 +56,5 @@ public interface ActivityDao {
     List<Activity> findName(String name);
 
     List<Activity> findA(Activity activity);
+
 }

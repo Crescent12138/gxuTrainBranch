@@ -17,7 +17,7 @@ public interface MeasureViewDao {
      * @return
      */
      List<MeasureView>queryView(int offset,int count);
-    List<MeasureView>queryId(int id);
+    List<MeasureView>queryId(long id);
     /***
      * 计数
      * @return
@@ -38,4 +38,6 @@ public interface MeasureViewDao {
      * @return
      */
     List<MeasureView>queryAsc(int offset,int count);
+
+
 }

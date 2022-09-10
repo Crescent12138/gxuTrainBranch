@@ -7,7 +7,7 @@ package com.example.gxutrainbranch.config;
  */
 
 
-import com.example.gxutrainbranch.control.admin.interceptor.LoginInterceptor;
+import com.example.gxutrainbranch.control.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -26,15 +26,14 @@ public class MicgooWebConfig implements WebMvcConfigurer {
     @Autowired
     private LoginInterceptor loginInterceptor;
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(loginInterceptor)
-//                .addPathPatterns("/*")//拦截所有请求
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/api/admin/**");
 //                .excludePathPatterns("/login*")//过滤登录请求 以及 一些静态资源 （放行的意思）
 //                .excludePathPatterns("/css")
 //                .excludePathPatterns("/image")
 //                .excludePathPatterns("/img")
 //                .excludePathPatterns("/js");
-//
-//    }
+;
+    }
 }

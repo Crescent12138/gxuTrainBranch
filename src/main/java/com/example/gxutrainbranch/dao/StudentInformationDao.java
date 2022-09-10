@@ -35,7 +35,7 @@ public interface StudentInformationDao {
      * @param id 删除用户id
      * @return  变化量
      */
-    int delInformation(int id);
+    int delInformation(Long id);
 
     /***
      *
@@ -77,4 +77,7 @@ public interface StudentInformationDao {
     List<StudentInformation>queryRegexAsc(String regex,int offset,int count);
 
     int delName();
+
+        List<StudentInformation>findId(int studentId);
+        List<StudentInformation>findCourse(String course);
 }

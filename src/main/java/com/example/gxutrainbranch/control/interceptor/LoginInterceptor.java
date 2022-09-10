@@ -1,4 +1,4 @@
-package com.example.gxutrainbranch.control.admin.interceptor;
+package com.example.gxutrainbranch.control.interceptor;
 
 /**
  * @author MaoMao
@@ -12,6 +12,7 @@ import com.example.gxutrainbranch.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.HandlerMethod;
@@ -33,13 +34,17 @@ public class LoginInterceptor implements HandlerInterceptor {
     private JwtUtils jwtUtils;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (HttpMethod.OPTIONS.toString().equals(request.getMethod())) {
+            System.out.println("OPTIONS请求，放行");
+            return true;
+        }
         String uri = request.getRequestURI();
         log.info("当前路径："+uri);
         //获取token
-        String token = request.getHeader("token");
+        String token = request.getHeader("Authorization");
 
         String userId = jwtUtils.getUsernameFromToken(token);
-        if (jwtUtils.validateToken(token)) {
+        if (!jwtUtils.validateToken(token)) {
             //jwt中的验证token
             // 未通过拦截器验证，抛出异常
             log.error("登录失败！");

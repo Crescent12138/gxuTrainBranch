@@ -36,4 +36,9 @@
         from admin d
         where userName = #{userName}
     </select>
+    <select id="queryId" resultType="com.example.gxutrainbranch.entity.Admin">
+    select *
+    from admin
+    where userId = #{id}
+    </select>
 </mapper>

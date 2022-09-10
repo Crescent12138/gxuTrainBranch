@@ -14,15 +14,15 @@
                  studentName,
                  studentSex,
                  studentClass,
-                 studentCourse,
+                 personMajor,
                  studentScore
         )
         values (
-               #{studentId},
+               #{studentID},
                #{studentName},
                #{studentSex},
                #{studentClass},
-               #{studentCourse},
+               #{personMajor},
                #{studentScore}
                )
     </insert>
@@ -43,9 +43,9 @@
             studentName     =   #{studentName},
             studentSex      =   #{studentSex},
             studentClass    =   #{studentClass},
-            studentCourse   =   #{studentCourse},
+            personMajor   =   #{personMajor},
             studentScore    =   #{studentScore}
-        where studentId= #{studentId}
+        where studentId= #{studentID}
     </update>
     <select id="queryRegex" resultType="com.example.gxutrainbranch.entity.StudentInformation">
         select * from studentinformation
@@ -54,7 +54,7 @@
                  studentName         like concat('%',#{regex},'%') or
                  studentSex          like concat('%',#{regex},'%') or
                  studentClass        like concat('%',#{regex},'%') or
-                 studentCourse       like concat('%',#{regex},'%')
+                 personMajor       like concat('%',#{regex},'%')
         limit #{offset},#{count}
     </select>
     <select id="queryRegexDesc" resultType="com.example.gxutrainbranch.entity.StudentInformation">
@@ -64,7 +64,7 @@
             studentName         like concat('%',#{regex},'%') or
             studentSex          like concat('%',#{regex},'%') or
             studentClass        like concat('%',#{regex},'%') or
-            studentCourse       like concat('%',#{regex},'%')
+            personMajor       like concat('%',#{regex},'%')
         order by studentScore desc
         limit #{offset},#{count}
     </select>
@@ -76,9 +76,18 @@
 
             studentSex          like concat('%',#{regex},'%') or
             studentClass        like concat('%',#{regex},'%') or
-            studentCourse       like concat('%',#{regex},'%')
+            personMajor       like concat('%',#{regex},'%')
         order by studentScore asc
         limit #{offset},#{count}
+    </select>
+    <select id="findId" resultType="com.example.gxutrainbranch.entity.StudentInformation">
+        select * from studentinformation
+        where studentId=#{studentId}
+    </select>
+    <select id="findCourse">
+        select * from studentinformation
+        where studentClass like concat(#{course},'%')
+        order by studentScore desc
     </select>
 
 </mapper>

@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StudentInformation {
     private String studentClass;
-    private String studentCourse;
+    private String personMajor;
     private long studentID;
     private String studentName;
     private double studentScore;

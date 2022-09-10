@@ -1,5 +1,6 @@
 package com.example.gxutrainbranch.service;
 
+import com.example.gxutrainbranch.dao.MeasureViewDao;
 import com.example.gxutrainbranch.dao.StudentMeasurePointDao;
 import com.example.gxutrainbranch.entity.Page;
 import com.example.gxutrainbranch.entity.StudentMeasurePoint;
@@ -35,7 +36,7 @@ public class MeasurePointService {
      * @return  是否成功
      */
 
-    public boolean delMeasure(int id){
+    public boolean delMeasure(long id){
         if(studentMeasurePointDao.delStudentMeasurePoint(id) == 1){
             return true;
         }
@@ -73,5 +74,8 @@ public class MeasurePointService {
      */
     public Page queryId(int type,int currentPage,int numberPerPage){
         return new Page(studentMeasurePointDao.queryUserMeasurePoint(type,(currentPage - 1) * numberPerPage, numberPerPage), studentMeasurePointDao.count(type));
+    }
+    public void delName(long id){
+        studentMeasurePointDao.delNameId(id);
     }
 }

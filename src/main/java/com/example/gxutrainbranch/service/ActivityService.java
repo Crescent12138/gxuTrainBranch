@@ -71,13 +71,14 @@ public class ActivityService {
         return new Page(activityDao.queryType(type,(currentPage - 1) * numberPerPage, numberPerPage), activityDao.getCount(type));
     }
 
-    public boolean check(Activity activity) {
+    public long check(Activity activity) {
         List<Activity> lsA = activityDao.findA(activity);
         if(lsA.size() == 0) {
             addActivity(activity);
-            return true;
+            List<Activity> ls =  activityDao.findA(activity);
+            return ls.get(0).getActivityId();
         }
-        return false;
+        return lsA.get(0).getActivityId();
     }
 
 }

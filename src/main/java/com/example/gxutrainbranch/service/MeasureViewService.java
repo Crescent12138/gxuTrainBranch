@@ -18,7 +18,7 @@ import java.util.List;
 public class MeasureViewService {
     @Autowired
     MeasureViewDao measureViewDao;
-    public List<MeasureView> queryId(int id){
+    public List<MeasureView> queryId(long id){
         return measureViewDao.queryId(id);
     }
     /***
